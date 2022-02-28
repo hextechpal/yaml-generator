@@ -1,0 +1,6 @@
+        - stage:
+            name: stage{{.}} - run 10 parallel tests
+            identifier: stage{{.}}_run_10_parallel_tests
+            template:
+            templateRef: run_10_tests
+            versionLabel: "1.0"

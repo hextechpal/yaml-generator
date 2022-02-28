@@ -1,0 +1,34 @@
+pipeline:
+  name: {{.Name}}
+  identifier: {{.Identifier}}
+  projectIdentifier: {{.Project}}
+  orgIdentifier: {{.Org}}
+  stages:
+  {{- if .IsParallel}}
+      {{template "parallelStage" .Sl}}
+    {{else}}
+      {{- template "stage" .Sl}}
+    {{end}}
+
+{{- define "stage"}}
+  {{- range $val := .}}
+    - stage:
+        name: stage{{$val}} - run 10 parallel tests
+        identifier: stage{{$val}}_run_10_parallel_tests
+        template:
+          templateRef: run_10_tests
+          versionLabel: "1.0"
+  {{- end}}
+{{- end -}}
+
+{{- define "parallelStage"}}
+    -parallel:
+    {{- range $val := .}}
+      - stage:
+          name: stage{{$val}} - run 10 parallel tests
+          identifier: stage{{$val}}_run_10_parallel_tests
+          template:
+            templateRef: run_10_tests
+            versionLabel: "1.0"
+    {{- end}}
+{{- end -}}
