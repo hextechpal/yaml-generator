@@ -39,7 +39,7 @@ func (p *Pipeline) GenerateYaml() error {
 		return err
 	}
 	t := template.Must(template.New("tmpl").Parse(string(in)))
-	f, err := os.Create(fmt.Sprintf("%s.yaml", p.Name))
+	f, err := os.Create(fmt.Sprintf("output/%s.yaml", p.Name))
 	if err != nil {
 		return err
 	}
