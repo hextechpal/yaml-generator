@@ -22,7 +22,7 @@ pipeline:
 {{- end -}}
 
 {{- define "parallelStage"}}
-    -parallel:
+    - parallel:
     {{- range $val := .}}
       - stage:
           name: stage{{$val}} - run 10 parallel tests
